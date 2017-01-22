@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MemoriesWeb.Core.Repositories;
+using MemoriesWeb.Photo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +25,11 @@ namespace MemoriesWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Settings
+            services.AddOptions();
+            services.Configure<MySettings>(Configuration.GetSection("MySettings"));
+            services.AddScoped<IMemoryRepository, MemoryRepository>();
+            services.AddScoped<IPhotoService, PhotoService>();
             // Add framework services.
             services.AddMvc();
         }

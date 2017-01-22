@@ -1,4 +1,4 @@
-﻿{
+{
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.0",
@@ -19,7 +19,11 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0"
+    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
+    "MemoriesWeb.Core": "1.0.0-*",
+    "MemoriesWeb.Messaging": "1.0.0-*",
+    "MemoriesWeb.Photo": "1.0.0-*",
+    "System.Linq": "4.1.0"
   },
 
   "tools": {
