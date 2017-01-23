@@ -70,7 +70,14 @@ namespace MemoriesWeb.Controllers
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public ActionResult Photos()
         {
-            return Json(new { result = "Memories" });
+            List<string> l = new List<string>();
+            l.Add("https://www.tutorialspoint.com/images/html.gif");
+            l.Add("https://www.tutorialspoint.com/images/html.gif");
+            l.Add("https://www.tutorialspoint.com/images/html.gif");
+            l.Add("https://www.tutorialspoint.com/images/html.gif");
+            l.Add("https://www.tutorialspoint.com/images/html.gif");
+            l.Add("https://www.tutorialspoint.com/images/html.gif");
+            return Json(new { result = l });
         }
     }
 }
