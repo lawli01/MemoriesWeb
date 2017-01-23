@@ -12,9 +12,9 @@ namespace MemoriesWeb.Photo
 {
     public class PhotoService : IPhotoService
     {
-        public async Task<IEnumerable<InstagramPhoto>> GetPhotosFromPhotoService()
+        public async Task<IEnumerable<InstagramPhoto>> GetPhotosFromPhotoService(int userId)
         {
-            string page = "http://localhost:8081/api/photos";
+            string page = $"http://localhost:8081/api/photos/{userId}";
 
             using (HttpClient client = new HttpClient())
             using (HttpResponseMessage response = await client.GetAsync(page))

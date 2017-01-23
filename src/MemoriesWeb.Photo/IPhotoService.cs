@@ -6,6 +6,6 @@ namespace MemoriesWeb.Photo
 {
     public interface IPhotoService
     {
-        Task<IEnumerable<InstagramPhoto>> GetPhotosFromPhotoService();
+        Task<IEnumerable<InstagramPhoto>> GetPhotosFromPhotoService(int userid);
     }
 }

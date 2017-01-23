@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MemoriesWeb.Controllers
 {
@@ -24,13 +25,11 @@ namespace MemoriesWeb.Controllers
             _photoService = photoService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var photos = await _photoService.GetPhotosFromPhotoService(1);
 
-            var photos = _photoService.GetPhotosFromPhotoService();
-
-            ViewData["Images"] = photos.Result.Select(p => p.images.thumbnail.url);
-            //Receive rec = new Receive();
+            ViewData["Images"] = photos.Select(p => p.images.thumbnail.url);
             return View();
         }
 
