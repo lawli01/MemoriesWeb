@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,9 +28,9 @@ namespace MemoriesWeb.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var photos = await _photoService.GetPhotosFromPhotoService(1);
+            //var photos = await _photoService.GetPhotosFromPhotoService(1);
 
-            ViewData["Images"] = photos.Select(p => p.images.thumbnail.url);
+            //ViewData["Images"] = photos.Select(p => p.images.thumbnail.url);
             return View();
         }
 
@@ -63,6 +64,13 @@ namespace MemoriesWeb.Controllers
         public IActionResult Error()
         {
             return View();
+        }
+
+        [Route("photos")]
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        public ActionResult Photos()
+        {
+            return Json(new { result = "Memories" });
         }
     }
 }

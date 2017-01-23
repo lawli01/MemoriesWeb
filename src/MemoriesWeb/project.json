@@ -23,7 +23,8 @@
     "MemoriesWeb.Core": "1.0.0-*",
     "MemoriesWeb.Messaging": "1.0.0-*",
     "MemoriesWeb.Photo": "1.0.0-*",
-    "System.Linq": "4.1.0"
+    "System.Linq": "4.1.0",
+    "React.AspNet": "3.0.0"
   },
 
   "tools": {
