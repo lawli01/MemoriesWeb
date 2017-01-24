@@ -1,4 +1,5 @@
-﻿var App = React.createClass({
+﻿
+var PhotoList = React.createClass({
     getInitialState: function() {
         return{ data: [] };
     },
@@ -19,11 +20,13 @@
         return (
             <div>
                 {names.map(function(object, i) {
-                return <img src={object} key={i}></img>;
-            })}
+                    return <img src={object} key={i}/>;
+                })}
             </div>
         );
-        }
+    }
 });
 
-ReactDOM.render(<App url="/photos"/>, document.getElementById('content'));
+const app = document.getElementById('app');
+
+ReactDOM.render(<PhotoList url="/photos"/>, app);
