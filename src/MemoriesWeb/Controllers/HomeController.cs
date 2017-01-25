@@ -26,41 +26,11 @@ namespace MemoriesWeb.Controllers
             _photoService = photoService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            //var photos = await _photoService.GetPhotosFromPhotoService(1);
-
-            //ViewData["Images"] = photos.Select(p => p.images.thumbnail.url);
             return View();
         }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            //Send send = new Send();
-            //send.SendMessage();
-
-            //var mem = new Memory()
-            //{
-            //    Name = "MyFirstMemory",
-            //    Rating = 5,
-            //    UploadDate = DateTime.UtcNow,
-            //    UserId = Guid.NewGuid().ToString()
-            //};
-
-            //_memoryRepository.AddMemory(mem, _config.Value.SqlConnectionString);
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
+        
         public IActionResult Error()
         {
             return View();
@@ -68,16 +38,11 @@ namespace MemoriesWeb.Controllers
 
         [Route("photos")]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public ActionResult Photos()
+        public async Task<ActionResult> Photos()
         {
-            List<string> l = new List<string>();
-            l.Add("https://www.tutorialspoint.com/images/html.gif");
-            l.Add("https://www.tutorialspoint.com/images/html.gif");
-            l.Add("https://www.tutorialspoint.com/images/html.gif");
-            l.Add("https://www.tutorialspoint.com/images/html.gif");
-            l.Add("https://www.tutorialspoint.com/images/html.gif");
-            l.Add("https://www.tutorialspoint.com/images/html.gif");
-            return Json(new { result = l });
+            var photos = await _photoService.GetPhotosFromPhotoService(1);
+
+            return Json(new { result = photos.Select(p => p.images.thumbnail.url) });
         }
     }
 }

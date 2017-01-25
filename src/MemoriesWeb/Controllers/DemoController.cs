@@ -15,5 +15,30 @@ namespace MemoriesWeb.Controllers
         {
             return View();
         }
+
+        public IActionResult Manage()
+        {
+            ViewData["Message"] = "Your application description page.";
+
+            //Send send = new Send();
+            //send.SendMessage();
+
+            //var mem = new Memory()
+            //{
+            //    Name = "MyFirstMemory",
+            //    Rating = 5,
+            //    UploadDate = DateTime.UtcNow,
+            //    UserId = Guid.NewGuid().ToString()
+            //};
+
+            //_memoryRepository.AddMemory(mem, _config.Value.SqlConnectionString);
+
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
     }
 }
