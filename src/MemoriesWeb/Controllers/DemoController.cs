@@ -20,19 +20,6 @@ namespace MemoriesWeb.Controllers
         {
             ViewData["Message"] = "Your application description page.";
 
-            //Send send = new Send();
-            //send.SendMessage();
-
-            //var mem = new Memory()
-            //{
-            //    Name = "MyFirstMemory",
-            //    Rating = 5,
-            //    UploadDate = DateTime.UtcNow,
-            //    UserId = Guid.NewGuid().ToString()
-            //};
-
-            //_memoryRepository.AddMemory(mem, _config.Value.SqlConnectionString);
-
             return View();
         }
 

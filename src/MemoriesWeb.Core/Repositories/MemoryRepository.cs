@@ -18,17 +18,10 @@ namespace MemoriesWeb.Core.Repositories
                 db.Open();
 
                 string sqlQuery =
-                    @"INSERT INTO [dbo].[UserMemories]([Name],[Description],[Rating],[UploadDate],[UserId]) " +
-                    "VALUES (@Name,@Description,@Rating,@UploadDate,@UserId)";
-                try
-                {
-                    await db.ExecuteAsync(sqlQuery, memory);
-                }
-                catch (Exception e)
-                {
-                    var ex = e;
-                }
-                
+                    @"INSERT INTO [dbo].[UserMemories]([Name],[Description],[Rating],[UploadDate],[UserId],[Image]) " +
+                    "VALUES (@Name,@Description,@Rating,@UploadDate,@UserId,@Image)";
+
+                await db.ExecuteAsync(sqlQuery, memory);
             }
         }
 
@@ -39,7 +32,7 @@ namespace MemoriesWeb.Core.Repositories
                 db.Open();
 
                 string sqlQuery =
-                    @"UPDATE [dbo].[UserMemories] SET Name = @Name,Description= @Description,Rating=@Rating,UploadDate=@UploadDate,UserId=@UserId";
+                    @"UPDATE [dbo].[UserMemories] SET Name = @Name,Description= @Description,Rating=@Rating,UploadDate=@UploadDate,UserId=@UserId,Image=@Image";
                 await db.ExecuteAsync(sqlQuery, memory);
             }
         }
