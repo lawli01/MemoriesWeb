@@ -1,7 +1,8 @@
 # MemoriesWeb
-Pet project for photo application using .NET Core.
 
-View your favourite memories in an organise collection.
+The .NET Core/React source code for Memories pet project.
+
+View your favourite memories in an organised collection.
 
 Create a private collection of your favourite photos, add a story, memorable date and tag them for searching.
 
