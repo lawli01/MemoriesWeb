@@ -16,14 +16,13 @@ namespace MemoriesWeb.Controllers
     {
         private IOptions<MySettings> _config;
         private readonly IMemoryRepository _memoryRepository;
-        private readonly IPhotoService _photoService;
+   
 
 
         public HomeController(IOptions<MySettings> config, IMemoryRepository memoryRepository, IPhotoService photoService)
         {
             _config = config;
             _memoryRepository = memoryRepository;
-            _photoService = photoService;
         }
 
         public IActionResult Index()
@@ -36,13 +35,6 @@ namespace MemoriesWeb.Controllers
             return View();
         }
 
-        [Route("photos")]
-        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<ActionResult> Photos()
-        {
-            var photos = await _photoService.GetPhotosFromPhotoService(1);
-
-            return Json(new { result = photos.Select(p => p.images.thumbnail.url) });
-        }
+       
     }
 }
