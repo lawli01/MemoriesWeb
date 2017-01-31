@@ -8,14 +8,11 @@ using MemoriesWeb.Core.Repositories;
 using Microsoft.Extensions.Options;
 using MemoriesWeb.Photo;
 
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace MemoriesWeb.Controllers
 {
     public class ManageController : Controller
     {
         private readonly IRepository<Memory> _memoryRepository;
-     
         private readonly IPhotoService _photoService;
 
         public ManageController(
@@ -26,7 +23,6 @@ namespace MemoriesWeb.Controllers
             _photoService = photoService;
         }
 
-        // GET: /<controller>/
         public IActionResult Index()
         {
             return RedirectToAction("Manage", "Demo");

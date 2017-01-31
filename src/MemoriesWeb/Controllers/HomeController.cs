@@ -23,7 +23,5 @@ namespace MemoriesWeb.Controllers
         {
             return View();
         }
-
-       
     }
 }
