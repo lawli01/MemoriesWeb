@@ -4,7 +4,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
+using MemoriesWeb.Core.Common;
 using MemoriesWeb.Core.Model;
+using Microsoft.Extensions.Options;
 using Npgsql;
 
 namespace MemoriesWeb.Core.Repositories
@@ -12,9 +14,9 @@ namespace MemoriesWeb.Core.Repositories
     public class MemoryRepository : IRepository<Memory>
     {
         private readonly string _connectionString;
-        public MemoryRepository()
+        public MemoryRepository(IOptions<MySettings> config)
         {
-            _connectionString = "Host=127.0.0.1;Username=postgres;Password=puppylile;Database=MemoriesDb";
+            _connectionString = config.Value.PostgresSqlConnectionString;
         }
 
         internal IDbConnection Connection => new NpgsqlConnection(_connectionString);

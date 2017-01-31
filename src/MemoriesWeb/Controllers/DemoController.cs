@@ -14,11 +14,9 @@ namespace MemoriesWeb.Controllers
     public class DemoController : Controller
     {
         private readonly IRepository<Memory> _memoryRepository;
-        private IOptions<MySettings> _config;
 
-        public DemoController(IRepository<Memory> memoryRepository, IOptions<MySettings> config)
+        public DemoController(IRepository<Memory> memoryRepository)
         {
-            _config = config;
             _memoryRepository = memoryRepository;
         }
 

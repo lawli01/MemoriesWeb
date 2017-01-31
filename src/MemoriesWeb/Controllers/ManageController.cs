@@ -15,15 +15,13 @@ namespace MemoriesWeb.Controllers
     public class ManageController : Controller
     {
         private readonly IRepository<Memory> _memoryRepository;
-        private IOptions<MySettings> _config;
+     
         private readonly IPhotoService _photoService;
 
         public ManageController(
             IRepository<Memory> memoryRepository,
-            IOptions<MySettings> config,
             IPhotoService photoService)
         {
-            _config = config;
             _memoryRepository = memoryRepository;
             _photoService = photoService;
         }
