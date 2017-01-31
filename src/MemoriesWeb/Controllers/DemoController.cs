@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MemoriesWeb.Core.Model;
 using Microsoft.AspNetCore.Mvc;
 using MemoriesWeb.Core.Repositories;
 using Microsoft.Extensions.Options;
@@ -12,10 +13,10 @@ namespace MemoriesWeb.Controllers
 {
     public class DemoController : Controller
     {
-        private readonly IMemoryRepository _memoryRepository;
+        private readonly IRepository<Memory> _memoryRepository;
         private IOptions<MySettings> _config;
 
-        public DemoController(IMemoryRepository memoryRepository, IOptions<MySettings> config)
+        public DemoController(IRepository<Memory> memoryRepository, IOptions<MySettings> config)
         {
             _config = config;
             _memoryRepository = memoryRepository;
@@ -43,7 +44,7 @@ namespace MemoriesWeb.Controllers
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<ActionResult> Memories()
         {
-            var memories = await _memoryRepository.GetAllMemorys(_config.Value.SqlConnectionString);
+            var memories = await _memoryRepository.FindAllAsync();
 
             return Json(new { result = memories });
         }

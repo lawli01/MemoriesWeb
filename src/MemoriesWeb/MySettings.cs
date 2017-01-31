@@ -8,5 +8,6 @@ namespace MemoriesWeb
     public class MySettings
     {
         public string SqlConnectionString { get; set; }
+        public string PostgresSqlConnectionString { get; set; }
     }
 }

@@ -1,75 +1,67 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using System.Linq;
 using System.Threading.Tasks;
-using MemoriesWeb.Core.Model;
-using MemoriesWeb.Core.Repositories;
 using Dapper;
-using System;
+using MemoriesWeb.Core.Model;
+using Npgsql;
 
 namespace MemoriesWeb.Core.Repositories
 {
-    public class MemoryRepository : IMemoryRepository
+    public class MemoryRepository : IRepository<Memory>
     {
-        public async Task AddMemory(Memory memory, string connectionString)
+        private readonly string _connectionString;
+        public MemoryRepository()
         {
-            using (IDbConnection db = new SqlConnection(connectionString))
+            _connectionString = "Host=127.0.0.1;Username=postgres;Password=puppylile;Database=MemoriesDb";
+        }
+
+        internal IDbConnection Connection => new NpgsqlConnection(_connectionString);
+
+        public async Task<int> AddAsync(Memory item)
+        {
+            using (IDbConnection dbConnection = Connection)
             {
-                db.Open();
-
-                string sqlQuery =
-                    @"INSERT INTO [dbo].[UserMemories]([Name],[Description],[Rating],[UploadDate],[UserId],[Image]) " +
-                    "VALUES (@Name,@Description,@Rating,@UploadDate,@UserId,@Image)";
-
-                await db.ExecuteAsync(sqlQuery, memory);
+                dbConnection.Open();
+                return await dbConnection.ExecuteAsync("INSERT INTO dbo.Memories VALUES(@Name,@Description,@Rating,@UploadDate,@Image,@UserId)", item);
             }
         }
 
-        public async Task UpdateMemory(Memory memory, string connectionString)
+        public async Task<IEnumerable<Memory>> FindAllAsync()
         {
-            using (IDbConnection db = new SqlConnection(connectionString))
+            using (IDbConnection dbConnection = Connection)
             {
-                db.Open();
-
-                string sqlQuery =
-                    @"UPDATE [dbo].[UserMemories] SET Name = @Name,Description= @Description,Rating=@Rating,UploadDate=@UploadDate,UserId=@UserId,Image=@Image";
-                await db.ExecuteAsync(sqlQuery, memory);
+                dbConnection.Open();
+                return await dbConnection.QueryAsync<Memory>("SELECT * FROM dbo.Memories");
             }
         }
 
-        public async Task DeleteMemory(int id, string connectionString)
+        public async Task<Memory> FindByIdAsync(int id)
         {
-            using (IDbConnection db = new SqlConnection(connectionString))
+            using (IDbConnection dbConnection = Connection)
             {
-                db.Open();
-
-                string sqlQuery = "DELETE FROM [dbo].[UserMemories] WHERE id=@Id";
-                await db.ExecuteAsync(sqlQuery, new {Id = id});
+                dbConnection.Open();
+                return (await dbConnection.QueryAsync<Memory>("SELECT * FROM dbo.Memories WHERE id = @Id", new {Id = id})).FirstOrDefault();
             }
         }
 
-        public async Task<Memory> GetMemory(int id, string connectionString)
+        public async Task<int> RemoveAsync(int id)
         {
-            using (IDbConnection db = new SqlConnection(connectionString))
+            using (IDbConnection dbConnection = Connection)
             {
-                db.Open();
-
-                string sqlQuery = "SELECT * FROM [dbo].[UserMemories] WHERE id=@Id";
-                var result = await db.QueryAsync<Memory>(sqlQuery, new {Id = id});
-                return null;
+                dbConnection.Open();
+                return await dbConnection.ExecuteAsync("DELETE FROM dbo.Memories WHERE Id=@Id", new { Id = id });
             }
         }
 
-        public async Task<IEnumerable<Memory>> GetAllMemorys(string connectionString)
+        public async Task<int> UpdateAsync(Memory item)
         {
-            using (IDbConnection db = new SqlConnection(connectionString))
+            using (IDbConnection dbConnection = Connection)
             {
-                db.Open();
-
-                string sqlQuery = "SELECT * FROM [dbo].[UserMemories]";
-                return await db.QueryAsync<Memory>(sqlQuery);
+                dbConnection.Open();
+                return await dbConnection.ExecuteAsync("UPDATE dbo.Memories SET name=@Name,description=@Description,rating=@Rating,uploadDate=@UploadDate,image=@Image,userid=@UserId WHERE id = @Id", item);
             }
         }
     }
 }
-

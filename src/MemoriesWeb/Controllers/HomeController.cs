@@ -15,14 +15,13 @@ namespace MemoriesWeb.Controllers
     public class HomeController : Controller
     {
         private IOptions<MySettings> _config;
-        private readonly IMemoryRepository _memoryRepository;
-   
+        private readonly IRepository<Memory> _memoryRepository;
 
-
-        public HomeController(IOptions<MySettings> config, IMemoryRepository memoryRepository, IPhotoService photoService)
+        public HomeController(IOptions<MySettings> config, IRepository<Memory> memoryRepository, IPhotoService photoService)
         {
             _config = config;
             _memoryRepository = memoryRepository;
+            _memoryRepository.AddAsync(null);
         }
 
         public IActionResult Index()

@@ -14,12 +14,12 @@ namespace MemoriesWeb.Controllers
 {
     public class ManageController : Controller
     {
-        private readonly IMemoryRepository _memoryRepository;
+        private readonly IRepository<Memory> _memoryRepository;
         private IOptions<MySettings> _config;
         private readonly IPhotoService _photoService;
 
         public ManageController(
-            IMemoryRepository memoryRepository,
+            IRepository<Memory> memoryRepository,
             IOptions<MySettings> config,
             IPhotoService photoService)
         {
@@ -41,7 +41,7 @@ namespace MemoriesWeb.Controllers
             var message = "";
             try
             {
-                await _memoryRepository.AddMemory(memory, _config.Value.SqlConnectionString);
+                await _memoryRepository.AddAsync(memory);
                 message = "Memory saved successfully";
                 status = true;
             }
