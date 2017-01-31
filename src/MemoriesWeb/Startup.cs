@@ -1,6 +1,7 @@
 ﻿using MemoriesWeb.Core.Common;
 using MemoriesWeb.Core.Model;
 using MemoriesWeb.Core.Repositories;
+using MemoriesWeb.Core.Services;
 using MemoriesWeb.Photo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,6 +34,7 @@ namespace MemoriesWeb
             services.AddOptions();
             services.Configure<MySettings>(Configuration.GetSection("MySettings"));
             services.AddScoped<IRepository<Memory>, MemoryRepository>();
+            services.AddScoped<IMemoryService, MemoryService>();
             services.AddScoped<IPhotoService, PhotoService>();
             // Add framework services.
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

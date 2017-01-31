@@ -21,12 +21,12 @@ namespace MemoriesWeb.Core.Repositories
 
         internal IDbConnection Connection => new NpgsqlConnection(_connectionString);
 
-        public async Task<int> AddAsync(Memory item)
+        public async Task<int> AddAsync(Memory memory)
         {
             using (IDbConnection dbConnection = Connection)
             {
                 dbConnection.Open();
-                return await dbConnection.ExecuteAsync("INSERT INTO dbo.Memories VALUES(@Name,@Description,@Rating,@UploadDate,@Image,@UserId)", item);
+                return await dbConnection.ExecuteAsync("INSERT INTO dbo.Memories VALUES(@Name,@Description,@Rating,@UploadDate,@Image,@UserId)", memory);
             }
         }
 
@@ -57,12 +57,12 @@ namespace MemoriesWeb.Core.Repositories
             }
         }
 
-        public async Task<int> UpdateAsync(Memory item)
+        public async Task<int> UpdateAsync(Memory memory)
         {
             using (IDbConnection dbConnection = Connection)
             {
                 dbConnection.Open();
-                return await dbConnection.ExecuteAsync("UPDATE dbo.Memories SET name=@Name,description=@Description,rating=@Rating,uploadDate=@UploadDate,image=@Image,userid=@UserId WHERE id = @Id", item);
+                return await dbConnection.ExecuteAsync("UPDATE dbo.Memories SET name=@Name,description=@Description,rating=@Rating,uploadDate=@UploadDate,image=@Image,userid=@UserId WHERE id = @Id", memory);
             }
         }
     }

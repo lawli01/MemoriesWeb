@@ -7,19 +7,20 @@ using MemoriesWeb.Core.Model;
 using MemoriesWeb.Core.Repositories;
 using Microsoft.Extensions.Options;
 using MemoriesWeb.Photo;
+using MemoriesWeb.Core.Services;
 
 namespace MemoriesWeb.Controllers
 {
     public class ManageController : Controller
     {
-        private readonly IRepository<Memory> _memoryRepository;
+        private readonly IMemoryService _memoryService;
         private readonly IPhotoService _photoService;
 
         public ManageController(
-            IRepository<Memory> memoryRepository,
+            IMemoryService memoryService,
             IPhotoService photoService)
         {
-            _memoryRepository = memoryRepository;
+            _memoryService = memoryService;
             _photoService = photoService;
         }
 
@@ -35,7 +36,7 @@ namespace MemoriesWeb.Controllers
             var message = "";
             try
             {
-                await _memoryRepository.AddAsync(memory);
+                await _memoryService.AddMemory(memory);
                 message = "Memory saved successfully";
                 status = true;
             }

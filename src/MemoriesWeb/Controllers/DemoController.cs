@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MemoriesWeb.Core.Model;
 using Microsoft.AspNetCore.Mvc;
 using MemoriesWeb.Core.Repositories;
+using MemoriesWeb.Core.Services;
 using Microsoft.Extensions.Options;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -13,11 +14,11 @@ namespace MemoriesWeb.Controllers
 {
     public class DemoController : Controller
     {
-        private readonly IRepository<Memory> _memoryRepository;
+        private readonly IMemoryService _memoryService;
 
-        public DemoController(IRepository<Memory> memoryRepository)
+        public DemoController(IMemoryService memoryService)
         {
-            _memoryRepository = memoryRepository;
+            _memoryService = memoryService;
         }
 
         // GET: /<controller>/
@@ -42,8 +43,7 @@ namespace MemoriesWeb.Controllers
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<ActionResult> Memories()
         {
-            var memories = await _memoryRepository.FindAllAsync();
-
+            var memories = await _memoryService.GetAllMemories();
             return Json(new { result = memories });
         }
     }
