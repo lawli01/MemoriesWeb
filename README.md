@@ -8,4 +8,4 @@ Create a private collection of your favourite photos, add a story, memorable dat
 
 Add photos from your instagram.
 
-![Architecture](https://cloud.githubusercontent.com/assets/1974887/22428269/46785046-e6fe-11e6-8dc0-f3382a630581.png)
+![Architecture](https://cloud.githubusercontent.com/assets/1974887/22468981/5684b686-e7c2-11e6-8809-9adc7beac14d.png)
