@@ -23,7 +23,7 @@ namespace MemoriesWeb.Photo
 
         public async Task<IEnumerable<InstagramPhoto>> GetPhotosFromPhotoService(int userId)
         {
-            string page = $"{_photoServiceUrl}/photos/{userId}";
+            string page = $"{_photoServiceUrl}/{userId}";
 
             using (HttpClient client = new HttpClient())
             using (HttpResponseMessage response = await client.GetAsync(page))

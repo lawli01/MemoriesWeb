@@ -4,7 +4,8 @@ var PhotoList = React.createClass({
         return{ data: [] };
     },
 
-    componentDidMount: function() {
+    componentDidMount: function () {
+        debugger;
         var xhr = new XMLHttpRequest();
         xhr.open('get', this.props.url, true);
         xhr.onload = function () {
