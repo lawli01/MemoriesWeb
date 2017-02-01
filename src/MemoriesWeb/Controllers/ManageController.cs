@@ -36,6 +36,7 @@ namespace MemoriesWeb.Controllers
             var message = "";
             try
             {
+                memory.UserId = "1"; //demo user id
                 await _memoryService.AddMemory(memory);
                 message = "Memory saved successfully";
                 status = true;

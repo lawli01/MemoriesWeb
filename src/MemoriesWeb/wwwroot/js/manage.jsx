@@ -82,7 +82,6 @@ var ImageList = React.createClass({
 });
 
 //React component for generate form
-
 var ContactForm = React.createClass({
     //get initial state enent
     getInitialState : function(){
@@ -93,7 +92,9 @@ var ContactForm = React.createClass({
             Fields : [],
             ServerMessage: '',
             data: [],
-            Image:''
+            Image: '',
+            Rating: '',
+            UploadDate: ''
         }
     },
     // submit function
@@ -113,8 +114,9 @@ var ContactForm = React.createClass({
                 Name: this.state.Name,
                 Email : this.state.Email,
                 Description: this.state.Description,
-                UploadDate: new Date().toISOString(),
-                Image: this.state.Image
+                UploadDate: this.state.UploadDate,
+                Image: this.state.Image,
+                Rating: this.state.Rating
             }
 
             $.ajax({
@@ -127,7 +129,9 @@ var ContactForm = React.createClass({
                         Name : '',
                         Email  : '',
                         Description : '',
-                        ServerMessage: data.message
+                        ServerMessage: data.message,
+                        UploadDate: '',
+                        Rating: ''
                     });
                 }.bind(this),
                 error : function(e){
@@ -160,6 +164,18 @@ var ContactForm = React.createClass({
             Image: image
         });
     },
+    //handle change rating
+    onChangeRating: function (value) {
+        this.setState({
+            Rating: value
+        });
+    },
+    //handle change uploadDate
+    onChangeUploadDate: function (value) {
+        this.setState({
+            UploadDate: value
+        });
+    },
     //register input controls
     register : function(field){
         var s = this.state.Fields;
@@ -185,10 +201,12 @@ var ContactForm = React.createClass({
                 <ImageList onClick={ this.handleOnAdd } images={ this.state.data } />
                 <MyInput type={'text'} value={this.state.Name} label={'Name'} name={'Name'} htmlFor={'Name'} isrequired={true}
                          onChange={this.onChangeName} onComponentMounted={this.register} messageRequired={'Name required'} />
-                <MyInput type={'email'} value={this.state.Email} label={'Email'} name={'Email'} htmlFor={'Email'} isrequired={false}
-                         onChange={this.onChangeEmail} onComponentMounted={this.register} messageRequired={'Invalid Email'} />
                 <MyInput type={'textarea'} value={this.state.Description} label={'Description'} name={'Description'} htmlFor={'Description'} isrequired={true}
                          onChange={this.onChangeDescription} onComponentMounted={this.register} messageRequired={'Description required'} />
+                 <MyInput type={'text'} value={this.state.Rating} label={'Rating'} name={'Rating'} htmlFor={'Rating'} isrequired={true}
+                          onChange={this.onChangeRating} onComponentMounted={this.register} messageRequired={'Rating required'} />
+                 <MyInput type={'text'} value={this.state.UploadDate} label={'Upload Date'} name={'UploadDate'} htmlFor={'UploadDate'} isrequired={true}
+                          onChange={this.onChangeUploadDate} onComponentMounted={this.register} messageRequired={'Upload Date required'} />
                 <button type="submit" className="btn btn-default">Submit</button>
                 <p className="servermessage">{this.state.ServerMessage}</p>
             </form>
